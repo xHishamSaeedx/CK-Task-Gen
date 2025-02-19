@@ -40,9 +40,18 @@ class FileDocGenerator:
         component_name = re.search(r"# (.*?) Component", content).group(1)
         root_dir = re.search(r"Root directory: `(.*?)`", content).group(1)
         
-        # Extract key files
+        # Extract key files section
         files_section = content.split("### Key Files")[1].split("\n## ")[0]
-        files = [line.strip("- ").strip() for line in files_section.split("\n") if line.strip().startswith("- ")]
+        
+        # Look for numbered lines (e.g., "1. file.py")
+        # Skip the "Implementation sequence:" line
+        files = []
+        for line in files_section.split('\n'):
+            line = line.strip()
+            if re.match(r'^\d+\.', line):  # Matches lines starting with numbers
+                # Extract just the filename part after the number
+                filename = line.split('.', 1)[1].strip()
+                files.append(filename)
         
         return [(file, component_name, root_dir) for file in files if file]
 
@@ -92,8 +101,12 @@ def main():
         
         # Process each component's key files
         components_dir = Path("output/components")
-        for component_md in components_dir.glob("*.md"):
-            # Get component name from filename (e.g., "frontend.md" -> "frontend")
+        
+        # Get all component names from the markdown files
+        component_files = list(components_dir.glob("*.md"))
+        
+        # Generate documentation for each component
+        for component_md in component_files:
             component_name = component_md.stem
             
             # Create component directory in output
@@ -120,24 +133,22 @@ def main():
                 
                 with open(file_doc_path, "w") as f:
                     f.write(md_content)
-                
+        
+        # Dynamically generate and display the directory structure
         print("Documentation generated in output directory with the following structure:")
         print("output/")
         print("  ├── components/")
-        print("  │   ├── frontend.md")
-        print("  │   ├── backend.md")
-        print("  │   └── message_service.md")
-        print("  ├── frontend/")
-        print("  │   ├── overview.md")
-        print("  │   └── files/")
-        print("  │       ├── file1.md")
-        print("  │       └── file2.md")
-        print("  ├── backend/")
-        print("  │   ├── overview.md")
-        print("  │   └── files/")
-        print("  └── message_service/")
-        print("      ├── overview.md")
-        print("      └── files/")
+        for component_md in component_files:
+            component_name = component_md.stem
+            print(f"  │   ├── {component_name}.md")
+        print("  │   └── ...")
+        
+        for component_md in component_files:
+            component_name = component_md.stem
+            print(f"  ├── {component_name}/")
+            print("  │   ├── overview.md")
+            print("  │   └── files/")
+            print("  │       └── ...")
         
     except Exception as e:
         print(f"Error generating file documentation: {str(e)}")

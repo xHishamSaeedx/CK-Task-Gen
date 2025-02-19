@@ -121,7 +121,7 @@ if __name__ == "__main__":
         generator = ArchitectureGenerator(api_key)
         
         project_description = """
-        create a real-time chat application for a group of people to chat with each other
+        create a simple web application that allows users to sign up, login, and chat in a group
         """
         
         # Generate architecture
