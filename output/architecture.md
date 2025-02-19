@@ -3,79 +3,37 @@
 
 ## Overview
 
-A scalable and maintainable real-time chat application for groups of people to communicate with each other.
+Design a scalable and secure architecture for a group chat application using microservices and following SOLID principles
 
 
 ## System Components
 
 
-### Frontend (frontend)
-Handles user input and displays chat messages.
+### Web Socket Service (microservice)
+Handles real-time communication between clients
 
 **Inputs:**
-- user input
-- chat messages
-
-**Outputs:**
-- updated chat log
-
-**Key Libraries/Technologies:**
-- React
-- WebSockets
-
-**Additional Information:**
-Handles user authentication and authorization.
-
-
-
-### Backend (backend)
-Manages chat messages and user connections.
-
-**Inputs:**
+- user messages
 - user connections
-- chat messages
 
 **Outputs:**
-- updated chat log
+- broadcasted messages
 
 **Key Libraries/Technologies:**
-- Node.js
-- Express
+- WebSocket
 
 **Additional Information:**
-Handles chat message persistence and retrieval.
-
-
-
-### Message Service (microservice)
-Handles chat message processing and notification.
-
-**Inputs:**
-- chat messages
-
-**Outputs:**
-- processed chat messages
-
-**Key Libraries/Technologies:**
-- Apache Kafka
-- RabbitMQ
-
-**Additional Information:**
-Handles message queuing and notification.
+scaled using load balancers and cloud providers
 
 
 
 ## Communication Patterns
 
-- WebSockets
-
-- REST API
+- publish-subscribe pattern
 
 
 ## Deployment Considerations
 
-- Cloud Native
+- containerization using Docker
 
-- Containerization
-
-- Load Balancing
+- orchestration using Kubernetes
