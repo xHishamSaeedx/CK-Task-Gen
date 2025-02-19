@@ -1,0 +1,5 @@
+groq==0.3.1
+python-dotenv==1.0.0
+pydantic==2.6.1
+typing-extensions==4.9.0
+pydantic-ai==0.1.1 

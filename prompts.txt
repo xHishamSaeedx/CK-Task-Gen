@@ -1,0 +1,14 @@
+using pydantic ai, these md files being its needed docs and .env file having GROQ_API_KEY, 
+
+now i need to create a POC such that it takes a project description , and then it generates an md file with the best system architecture for the project and also following SOLID and software engineering architecture principles
+
+then in json file, include all components needed in the architecture (like frontend, backend, microservice etc), and for each component specify the overall description, input , output , major libraries needed , and any other useful info
+
+
+  Create a real-time collaboration platform for developers with:
+        - Code sharing and editing with syntax highlighting and version control
+        - Real-time video conferencing with screen sharing
+        - Integrated chat functionality with code snippet sharing
+        - Project management tools including kanban boards and issue tracking
+        - User authentication and team management
+        - File sharing and documentation features
